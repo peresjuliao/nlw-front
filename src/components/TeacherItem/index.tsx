@@ -1,35 +1,46 @@
 import React from 'react';
 
+import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
 import './styles.css';
 
-import whatsappIcon from '../../assets/images/icons/whatsapp.svg';
+export interface Teacher {
+    id: number;
+    avatar: string;
+    bio: string;
+    cost: number;
+    name: string;
+    subject: string;
+    whatsapp: string;
+}
 
-function TeacherItem() {
+interface TeacherItemProps {
+    teacher: Teacher;
+}
+
+
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+    
     return (
         <article className="teacher-item">
             <header>
-                <img src="https://avatars1.githubusercontent.com/u/1526112?s=460&u=11b18862377741828bb1caeeac23b4160620906c&v=4" alt="Peres Julião"/>
+                <img src={teacher.avatar} alt={teacher.name} />
                 <div>
-                    <strong>Peres Julião</strong>
-                    <span>Matemática</span>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
                 </div>
             </header>
 
-            <p>
-            Estusiasta das melhores tecnologias de matemática avançada.
-            <br/><br/>
-            A Matemática desenvolvida ao longo da história da humanidade sempre teve duas faces: uma atrelada à interpretação do real e outra ligada ao próprio desenvolvimento do espírito humano.
-            </p>
+            <p>{teacher.bio}</p>
 
             <footer>
                 <p>
                     Preço/hora
-                    <strong>R$ 50,00</strong>
+                    <strong>R$ {teacher.cost}</strong>
                 </p>
-                <button type="button">
+                <a href={`https://wa.me/${teacher.whatsapp}`}>
                     <img src={whatsappIcon} alt="Whatsapp"/>
                     Entrar em contato
-                </button>
+                </a>
             </footer>
         </article>
     )
